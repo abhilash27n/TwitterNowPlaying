@@ -20,7 +20,7 @@ app.set('view engine', 'handlebars');
 app.disable('etag');
 
 // Connect to our mongo database
-mongoose.connect('mongodb://node:nodenode@proximus.modulusmongo.net:27017/orajY4ta');
+mongoose.connect('mongodb://localhost/react-tweets');
 
 // Create a new ntwitter instance
 var twit = new twitter(config.twitter);
@@ -43,6 +43,6 @@ var server = http.createServer(app).listen(port, function() {
 var io = require('socket.io').listen(server);
 
 // Set a stream listener for tweets matching tracking keywords
-twit.stream('statuses/filter',{ track: 'javascript'}, function(stream){
+twit.stream('statuses/filter',{ track: '#nowplaying youtube'}, function(stream){
   streamHandler(stream,io);
 });
