@@ -22,3 +22,4 @@ Resources:
 http://linuxdrops.com/basic-commands-mongodb-show-tables-views-databases-create-users-and-more/
 https://facebook.github.io/react/tips/communicate-between-components.html
 
+Note: A little buggy in Firefox, works fine in Chrome.

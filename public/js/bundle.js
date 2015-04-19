@@ -68,8 +68,7 @@ module.exports = Tweet = React.createClass({displayName: 'Tweet',
     )
   },
   playSong: function(link){
-    console.log(link);
-    playReceivedSong(link);
+    parseLink(link);
   }
 });
 },{"react":150}],5:[function(require,module,exports){

@@ -24,7 +24,7 @@ module.exports = Tweet = React.createClass({
     )
   },
   playSong: function(link){
-    console.log(link);
-    playReceivedSong(link);
+    
+    parseLink(link);
   }
 });
