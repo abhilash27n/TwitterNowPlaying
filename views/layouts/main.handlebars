@@ -3,22 +3,89 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>React Tweets</title>
+    <title>What is the world listening to??</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
   <body>
   
+
+  <div style="width:60%; ">
     {{{ body }}}
     
-    <footer>
+  </div>
+  <div id="player" style="width:40%; position:fixed; top:10%; right:5%;">
+
+  </div>
+    <!-- <footer>
       <a class="link-back" title="Learning React: Building A Real-Time Node and React Application" href="http://scotch.io/tutorials/javascript/learning-react-building-a-real-time-node-and-react-application">&larr; Learning React: Building A Real-Time Node and React Application</a>
       <span class="update-message">to see the timeline update!</span>
       <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://scotch.io/tutorials/javascript/learning-react-building-a-real-time-node-and-react-application" data-text="Learning React: Building A Real-Time Node and React Application" data-via="scotch_io" data-count="none" data-hashtags="javascript">Tweet</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-    </footer>
+    </footer> -->
     
     <script src="https://cdn.socket.io/socket.io-1.1.0.js"></script>
     <script src="js/bundle.js"></script>
+    <script>
+      // 2. This code loads the IFrame Player API code asynchronously.
+      var tag = document.createElement('script');
 
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      // 3. This function creates an <iframe> (and YouTube player)
+      //    after the API code downloads.
+      var player;
+      function onYouTubeIframeAPIReady(youtube_link) {
+        player = new YT.Player('player', {
+          height: '390',
+          width: '640',
+          videoId: '{{ youtube_link }}',
+          videoId: youtube_link,
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange,
+            'onError': onPlayerError
+          }
+        });
+      }
+
+      // 4. The API will call this function when the video player is ready.
+      function onPlayerReady(event) {
+        event.target.playVideo();
+      }
+
+      // 5. The API calls this function when the player's state changes.
+      //    The function indicates that when playing a video (state=1),
+      //    the player should play for six seconds and then stop.
+      var done = false;
+      function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+          //setTimeout(stopVideo, 6000);
+          done = true;
+        }
+        //SUBMIT Form again once playing completed to fetch new randomsup song
+        if(event.data == YT.PlayerState.ENDED){
+         // submitForm();
+        }
+      }
+      function stopVideo() {
+        player.stopVideo();
+      }
+      //play song received by AJAX request
+      function playReceivedSong(link){
+        var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+        var match = link.match(regExp);
+        if (match && match[2].length == 11) {
+          player.loadVideoById(match[2]);
+        } else {
+          console.log("ERROR PARSING LINK");
+        }
+      }
+      //ERROR IN PLAYER
+      function onPlayerError(errorCode) {
+        //submitForm();
+    }
+    </script>
   </body>
 </html>

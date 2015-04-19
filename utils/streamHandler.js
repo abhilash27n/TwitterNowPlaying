@@ -5,35 +5,40 @@ module.exports = function(stream, io){
   // When tweets get sent our way ...
   stream.on('data', function(data) {
 
-    console.log(data)
-    console.log(data.entities.urls);
-    // Construct a new tweet object
-    var tweet = {
-      twid: data['id'],
-      active: false,
-      author: data['user']['name'],
-      avatar: data['user']['profile_image_url'],
-      body: data['text'],
-      date: data['created_at'],
-      screenname: data['user']['screen_name'],
-      url: data['entities']['urls']
-    };
+    youtube_link_exists = false;
 
-    // Create a new model instance with our object
-    console.log("BODY"+tweet.body);
-    
-    console.log("URLL"+tweet.url[0].expanded_url);
-
-    var tweetEntry = new Tweet(tweet);
-
-
-    // Save 'er to the database
-    tweetEntry.save(function(err) {
-      if (!err) {
-        // If everything is cool, socket.io emits the tweet.
-        io.emit('tweet', tweet);
+    for(urlkey in data.entities.urls){
+       link = data.entities.urls[urlkey].expanded_url;
+      if(link.indexOf('youtube.com')!=-1 || link.indexOf('youtu.be')!=-1){
+        youtube_link = link;
+        console.log("YOUTUBE URL: "+link);
+        youtube_link_exists = true;
       }
-    });
+    }
+
+    if(youtube_link_exists){
+        var tweet = {
+        twid: data['id'],
+        active: false,
+        author: data['user']['name'],
+        avatar: data['user']['profile_image_url'],
+        body: data['text'],
+        date: data['created_at'],
+        screenname: data['user']['screen_name'],
+        youtube: youtube_link
+      };
+
+      var tweetEntry = new Tweet(tweet);
+
+      // Save 'er to the database
+      tweetEntry.save(function(err) {
+        if (!err) {
+          // If everything is cool, socket.io emits the tweet.
+          io.emit('tweet', tweet);
+        }
+      });
+    }
+    
 
   });
 
