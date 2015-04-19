@@ -192,6 +192,12 @@ footer .update-message
     color: #1abc9c;
 }
 
+.right
+{
+    float: right;
+}
+
+
 .tweet blockquote cite a:hover
 {
     text-decoration: underline;

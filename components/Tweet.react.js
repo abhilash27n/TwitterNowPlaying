@@ -8,15 +8,17 @@ module.exports = Tweet = React.createClass({
     return (
       <div>
       <li className={"tweet" + (tweet.active ? ' active' : '')}>
+        
         <img src={tweet.avatar} className="avatar"/>
+        
         <blockquote>
           <cite>
             <a href={"http://www.twitter.com/" + tweet.screenname}>{tweet.author}</a>  
             <span className="screen-name">@{tweet.screenname}</span> 
+            <input className="right" type="button" onClick={this.playSong.bind(this, tweet.youtube)} value="Play" key={tweet.youtube}/>
           </cite>
           <span className="content">{tweet.body}</span>
-        </blockquote>
-        <input type="button" onClick={this.playSong.bind(this, tweet.youtube)} value="Play" key={tweet.youtube}/>
+        </blockquote>  
       </li>
       </div>
     )

@@ -52,15 +52,17 @@ module.exports = Tweet = React.createClass({displayName: 'Tweet',
     return (
       React.DOM.div(null, 
       React.DOM.li({className: "tweet" + (tweet.active ? ' active' : '')}, 
+        
         React.DOM.img({src: tweet.avatar, className: "avatar"}), 
+        
         React.DOM.blockquote(null, 
           React.DOM.cite(null, 
             React.DOM.a({href: "http://www.twitter.com/" + tweet.screenname}, tweet.author), 
-            React.DOM.span({className: "screen-name"}, "@", tweet.screenname)
+            React.DOM.span({className: "screen-name"}, "@", tweet.screenname), 
+            React.DOM.input({className: "right", type: "button", onClick: this.playSong.bind(this, tweet.youtube), value: "Play", key: tweet.youtube})
           ), 
           React.DOM.span({className: "content"}, tweet.body)
-        ), 
-        React.DOM.input({type: "button", onClick: this.playSong.bind(this, tweet.youtube), value: "Play", key: tweet.youtube})
+        )
       )
       )
     )
