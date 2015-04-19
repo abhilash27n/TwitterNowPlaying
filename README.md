@@ -17,3 +17,8 @@ Code repository for the tutorial by @kenwheeler: [Build A Real-Time Twitter Stre
 6. Start the app: `node server.js`
 7. View in browser at: `http://localhost:8080`
 8. Play music using tweets received in realtime.
+
+Resources:
+http://linuxdrops.com/basic-commands-mongodb-show-tables-views-databases-create-users-and-more/
+https://facebook.github.io/react/tips/communicate-between-components.html
+
