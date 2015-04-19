@@ -9,7 +9,7 @@ module.exports = function(stream, io){
 
     for(urlkey in data.entities.urls){
        link = data.entities.urls[urlkey].expanded_url;
-      if(link.indexOf('youtube.com')!=-1 || link.indexOf('youtu.be')!=-1){
+      if((link.indexOf('youtube.com')!=-1 || link.indexOf('youtu.be')!=-1) && link.indexOf('search_query')==-1){
         youtube_link = link;
         console.log("YOUTUBE URL: "+link);
         youtube_link_exists = true;
