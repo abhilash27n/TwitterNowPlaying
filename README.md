@@ -1,5 +1,6 @@
-# Real Time Twitter Stream with Node and React
+# See what the world is playing right now on youtube.(Twitter streaming API)
 
+Thanks to the tutorial and code by scotchio for the twitter stream
 Code repository for the tutorial by @kenwheeler: [Build A Real-Time Twitter Stream with Node and React.js](http://scotch.io/tutorials/javascript/build-a-real-time-twitter-stream-with-node-and-react-js)
 
 ## Requirements
@@ -8,11 +9,11 @@ Code repository for the tutorial by @kenwheeler: [Build A Real-Time Twitter Stre
 
 ## How to Use
 
-1. Clone the repo: `git clone git@github.com:scotch-io/react-tweets`
-2. Go into folder: `cd react-tweets`
+1. Clone the repo
+2. Go into folder: `cd TwitterNowPlaying`
 3. Install dependencies: `npm install`
-4. Create local MongoDB database called **react-tweets** (configured in `server.js`)
-5. Replace credentials for Twitter API (configured in `config.js`)
+4. Create local MongoDB database called **react-tweets** (configur in `server.js`)
+5. Enter credentials for Twitter API (configured in `config.js`)
 6. Start the app: `node server.js`
 7. View in browser at: `http://localhost:8080`
-8. Tweet away!
+8. Play music using tweets received in realtime.
