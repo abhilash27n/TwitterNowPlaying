@@ -19,8 +19,19 @@ app.set('view engine', 'handlebars');
 // Disable etag headers on responses
 app.disable('etag');
 
+db_name = "react-tweets";
+
+//provide a sensible default for local development
+mongodb_connection_string = 'mongodb://localhost/' + db_name;
+//take advantage of openshift env vars when available:
+if(process.env.OPENSHIFT_MONGODB_DB_URL){
+  mongodb_connection_string = process.env.OPENSHIFT_MONGODB_DB_URL + db_name;
+}
+
 // Connect to our mongo database
-mongoose.connect('mongodb://localhost/react-tweets');
+mongoose.connect(mongodb_connection_string);
+
+
 
 // Create a new ntwitter instance
 var twit = new twitter(config.twitter);
